@@ -1,0 +1,154 @@
+---
+title: "Essay on Shiny Apps"
+format: html
+---
+
+# Essay on Shiny Apps
+
+## Prompt
+
+In Step 2, you learned how to build an interactive web app using Shiny. Let's assume that your coworkers are interested in learning about it and assume that you are helping them. Create a lecture note that you can use to teach the person. This will become part of the website under "Essay on Shiny Apps."
+
+## What is Shiny?
+
+Shiny is an R package that lets users turn R code into a web application. Instead of only creating a static report, Shiny lets users interact with the app. You can change inputs like dropdown menus, sliders, checkboxes, or text boxes.
+
+A Shiny app is useful because the audience doesn't need to know R or use RStudio to open the file. They can just open the app in a web browser to interact with the data.
+
+## Main Parts of a Shiny App
+
+A Shiny app usually has three parts:
+
+1. **User Interface (UI)**
+2. **Server**
+3. **shinyApp() function**
+
+## User Interface
+
+The user interface, or UI, controls what the user sees. This is where the app designer adds titles, input tools, and output spaces.
+
+Examples of inputs:
+
+- `selectInput()` - dropdown menus
+- `sliderInput()` - numeric sliders
+- `textInput()` - typed responses
+
+Examples of outputs:
+
+- `plotOutput()` - graphs
+- `tableOutput()` - tables
+- `textOutput()` - text
+
+The UI is important because it's the part of the app that the audience interacts with.
+
+## Server
+
+The server is where the app does the work. It takes the user's input, processes it, and creates output.
+
+For example, if the user chooses a year from a dropdown menu, the server can filter the data for that year and then create a graph.
+
+The server usually uses render functions such as:
+
+- `renderPlot()` - plots
+- `renderTable()` - tables
+- `renderText()` - text
+
+## Reactivity
+
+One of the most important parts of Shiny is **reactivity**.
+
+Reactivity means that the app will automatically update when the user changes an input. If the user moves a slider or chooses a different category then the plot or table will immediately update.
+
+## Example Shiny App Code
+
+```{r}
+#| eval: false
+
+# This code is an example that can be run through the qmd file, not the html
+
+library(shiny)
+library(ggplot2)
+library(dplyr)
+
+ui <- fluidPage(
+  titlePanel("Sample Shiny App: Car MPG Explorer"),
+
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "cylinders",
+        label = "Choose number of cylinders:",
+        choices = sort(unique(mtcars$cyl)),
+        selected = 4
+      )
+    ),
+
+    mainPanel(
+      plotOutput("mpgPlot"),
+      tableOutput("summaryTable")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  filtered_data <- reactive({
+    mtcars |>
+      filter(cyl == input$cylinders)
+  })
+
+  output$mpgPlot <- renderPlot({
+    ggplot(filtered_data(), aes(x = wt, y = mpg)) +
+      geom_point(size = 3) +
+      labs(
+        title = paste("MPG vs Weight for", input$cylinders, "Cylinder Cars"),
+        x = "Weight",
+        y = "Miles Per Gallon"
+      ) +
+      theme_minimal()
+  })
+
+  output$summaryTable <- renderTable({
+    filtered_data() |>
+      summarise(
+        Average_MPG = round(mean(mpg), 2),
+        Average_Weight = round(mean(wt), 2),
+        Number_of_Cars = n()
+      )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## How This Example Works
+
+The app first loads the required packages: `shiny`, `ggplot2`, and `dplyr`.
+
+The UI creates a page with a title, a sidebar, a dropdown menu, a plot area, and a table area.
+
+The server creates a reactive dataset called `filtered_data` so whenever the user changes the cylinder choice, Shiny filters the data again.
+
+The graph and table will update based on the filtered data.
+
+## Why Shiny is Useful
+
+Shiny is useful because it allows people to explore and interact with the data. Instead of sending someone a static chart, the creator can build an app where the audience chooses what they want to see.
+
+For example, coworkers could use a Shiny app to explore:
+
+- sales by region
+- survey results
+- student performance
+- website traffic
+- customer trends
+
+## Important Lessons from Step 2
+
+The main lesson from Step 2 is that Shiny connects user input to output. The user makes a choice, the server reacts to that choice, and the app updates the result.
+
+A basic Shiny app does not require advanced web design knowledge. The creator mainly needs to understand how the UI and server work together.
+
+## Conclusion
+
+Shiny is a powerful tool for creating interactive web applications in R. It allows users to move beyond static reports and create dashboards, tools, and apps that respond to user input. For coworkers who need to explore data, Shiny can make analysis easier to understand and more useful.

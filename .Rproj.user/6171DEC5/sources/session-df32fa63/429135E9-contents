@@ -1,0 +1,93 @@
+---
+title: "Essay on Shinylive"
+format: html
+---
+
+## Prompt
+
+In Step 3, you learned about serverless Shiny Apps with "Shinylive." What is Shinylive? Assume that you are also explaining it to your coworkers. How does it differ from the traditional Shiny app introduced in Step 2? What are the pros and cons of Shinylive in comparison with Shiny Apps? These lecture notes will become your "Essay on Shiny Live" part of the website.
+
+---
+
+# What is Shinylive?
+
+Shinylive is a technology that lets Shiny applications run directly in a user's web browser without requiring a dedicated Shiny server. Instead of performing calculations on a remote server, the application runs entirely on the user's computer through the browser.
+
+Shinylive applications can be hosted as static websites using services like GitHub Pages without needing Posit Connect or another Shiny hosting server.
+
+---
+
+# How Shinylive Works
+
+Traditional Shiny applications require a server that runs R. The user sends requests to the server and the server performs calculations, then the results are sent back to the browser.
+
+With Shinylive, the R session runs inside the browser using WebR technology. The browser downloads the application and performs the calculations locally instead of having to communicate with a remote server.
+
+This removes the need for a dedicated Shiny server while still making a interactive application.
+
+---
+
+# Traditional Shiny vs. Shinylive
+
+| Traditional Shiny | Shinylive |
+|-------------------|-----------|
+| Requires a Shiny server | No Shiny server required |
+| R runs on the server | R runs in the browser |
+| Server performs calculations | User's browser performs calculations |
+| Can securely connect to databases | Limited access to secure resources |
+| Can handle private data | Best for public data and applications |
+| Requires server hosting | Can be hosted as static files on GitHub Pages |
+
+---
+
+# Advantages of Shinylive
+
+Some advantages of Shinylive:
+
+- No dedicated Shiny server is required.
+- Applications can be hosted for free on GitHub Pages.
+- Lower hosting costs.
+- Easy to share with other users.
+- Reduces server workload because calculations happen in each user's browser.
+- Great for teaching, demonstrations, and public dashboards.
+
+---
+
+# Limitations of Shinylive
+
+Shinylive limitations:
+
+Because the application runs entirely inside the browser:
+
+- Secret information should never be included.
+- Secure passwords and API keys cannot be hidden.
+- Some R packages are not yet supported.
+- Applications may take a few seconds to load the first time.
+- Complex applications that require secure databases are better suited for traditional Shiny.
+
+---
+
+# When Should You Use Shinylive?
+
+Shinylive works well for:
+
+- Educational demonstrations
+- Public dashboards
+- Interactive tutorials
+- Research companion websites
+- Applications using public datasets
+
+Traditional Shiny is usually the better choice when an application:
+
+- Uses confidential information
+- Connects to databases
+- Requires user authentication
+- Needs server-side processing
+
+---
+
+# Conclusion
+
+Shinylive is an innovative development in the Shiny ecosystem because it allows developers to publish interactive applications without maintaining a Shiny server. By moving the R session into the user's browser, applications become easier and less expensive to distribute.
+
+Traditional Shiny remains the best choice for secure and complex applications but Shinylive is an good option for publicly available interactive applications.

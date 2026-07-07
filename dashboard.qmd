@@ -1,0 +1,57 @@
+---
+title: "Sample Dashboard"
+format:
+  dashboard:
+    theme: flatly
+    orientation: rows
+---
+
+## Setup
+
+```{r}
+#| include: false
+
+library(ggplot2)
+library(dplyr)
+```
+
+## Scatter Plot
+
+```{r}
+#| title: MPG vs Weight
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "steelblue", size = 3) +
+  labs(
+    x = "Weight (1000 lbs)",
+    y = "Miles Per Gallon"
+  ) +
+  theme_minimal()
+```
+
+## Cars by Cylinders
+
+```{r}
+#| title: Number of Cars by Cylinders
+
+ggplot(mtcars, aes(x = factor(cyl))) +
+  geom_bar(fill = "darkorange") +
+  labs(
+    x = "Number of Cylinders",
+    y = "Count of Cars"
+  ) +
+  theme_minimal()
+```
+
+## Average MPG Table
+
+```{r}
+#| title: Average MPG by Cylinders
+
+mtcars |>
+  group_by(cyl) |>
+  summarise(
+    Average_MPG = round(mean(mpg), 2),
+    Cars = n()
+  )
+```

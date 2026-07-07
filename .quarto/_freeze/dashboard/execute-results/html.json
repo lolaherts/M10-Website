@@ -1,0 +1,17 @@
+{
+  "hash": "ce429006848094e96b0b98aef04cd7cd",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Sample Dashboard\"\nformat:\n  dashboard:\n    theme: flatly\n    orientation: rows\n---\n\n## Setup\n\n\n\n## Scatter Plot\n\n\n::: {.cell title='MPG vs Weight'}\n::: {.cell-output-display}\n![](dashboard_files/figure-html/unnamed-chunk-2-1.png){width=768}\n:::\n:::\n\n\n## Cars by Cylinders\n\n\n::: {.cell title='Number of Cars by Cylinders'}\n::: {.cell-output-display}\n![](dashboard_files/figure-html/unnamed-chunk-3-1.png){width=768}\n:::\n:::\n\n\n## Average MPG Table\n\n\n::: {.cell title='Average MPG by Cylinders'}\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 3 × 3\n    cyl Average_MPG  Cars\n  <dbl>       <dbl> <int>\n1     4        26.7    11\n2     6        19.7     7\n3     8        15.1    14\n```\n\n\n:::\n:::\n",
+    "supporting": [
+      "dashboard_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,59 @@
+---
+title: "Home"
+format: html
+---
+
+# Welcome
+
+Hello, my name is Lola. Welcome to my Quarto website.
+
+------------------------------------------------------------------------
+
+## About Me
+
+![](images/clipboard-3806906901.jpeg)
+
+------------------------------------------------------------------------
+
+## Career Aspiration
+
+My career goal is to work in the sports or entertainment industry. I enjoy multimedia projects and community engagements initiatives. I would love to work for a Bay Area local news channel or radio station to cover sports.
+
+------------------------------------------------------------------------
+
+## Skills
+
+- R Programming
+- Quarto
+- Data Visualization
+- ggplot2
+- Data Wrangling with dplyr
+- Microsoft Excel
+- Tableau
+- SQL
+- GitHub
+
+------------------------------------------------------------------------
+
+## Education
+
+**California State Polytechnic University, Pomona**
+
+Bachelor's Degree
+
+Major: *Marketing Management*
+
+Minor: *Multimedia Journalism*
+
+Expected Graduation: *May 2027*
+
+------------------------------------------------------------------------
+
+## About This Website
+
+This website has several pages created for this assignment, throughout one module and several submodules:
+
+- Home
+- Dashboard
+- Essay on Shiny Apps
+- Essay on Shinylive

@@ -1,0 +1,14 @@
+{
+  "dashboard.qmd": {
+    "dashboard.html": "6af374f6"
+  },
+  "index.qmd": {
+    "index.html": "2557d552"
+  },
+  "shiny-apps.qmd": {
+    "shiny-apps.html": "971b496f"
+  },
+  "shinylive.qmd": {
+    "shinylive.html": "960cebaf"
+  }
+}

@@ -1,0 +1,135 @@
+[
+  {
+    "objectID": "shinylive.html",
+    "href": "shinylive.html",
+    "title": "Essay on Shinylive",
+    "section": "",
+    "text": "In Step 3, you learned about serverless Shiny Apps with “Shinylive.” What is Shinylive? Assume that you are also explaining it to your coworkers. How does it differ from the traditional Shiny app introduced in Step 2? What are the pros and cons of Shinylive in comparison with Shiny Apps? These lecture notes will become your “Essay on Shiny Live” part of the website."
+  },
+  {
+    "objectID": "shinylive.html#prompt",
+    "href": "shinylive.html#prompt",
+    "title": "Essay on Shinylive",
+    "section": "",
+    "text": "In Step 3, you learned about serverless Shiny Apps with “Shinylive.” What is Shinylive? Assume that you are also explaining it to your coworkers. How does it differ from the traditional Shiny app introduced in Step 2? What are the pros and cons of Shinylive in comparison with Shiny Apps? These lecture notes will become your “Essay on Shiny Live” part of the website."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "Hello, my name is Lola. Welcome to my Quarto website.\n\n\n\n\n\n\n\n\nMy career goal is to work in the sports or entertainment industry. I enjoy multimedia projects and community engagements initiatives. I would love to work for a Bay Area local news channel or radio station to cover sports.\n\n\n\n\n\nR Programming\nQuarto\nData Visualization\nggplot2\nData Wrangling with dplyr\nMicrosoft Excel\nTableau\nSQL\nGitHub\n\n\n\n\n\nCalifornia State Polytechnic University, Pomona\nBachelor’s Degree\nMajor: Marketing Management\nMinor: Multimedia Journalism\nExpected Graduation: May 2027\n\n\n\n\nThis website has several pages created for this assignment, throughout one module and several submodules:\n\nHome\nDashboard\nEssay on Shiny Apps\nEssay on Shinylive"
+  },
+  {
+    "objectID": "index.html#career-aspiration",
+    "href": "index.html#career-aspiration",
+    "title": "Home",
+    "section": "",
+    "text": "My career goal is to work in the sports or entertainment industry. I enjoy multimedia projects and community engagements initiatives. I would love to work for a Bay Area local news channel or radio station to cover sports."
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Home",
+    "section": "",
+    "text": "R Programming\nQuarto\nData Visualization\nggplot2\nData Wrangling with dplyr\nMicrosoft Excel\nTableau\nSQL\nGitHub"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Home",
+    "section": "",
+    "text": "California State Polytechnic University, Pomona\nBachelor’s Degree\nMajor: Marketing Management\nMinor: Multimedia Journalism\nExpected Graduation: May 2027"
+  },
+  {
+    "objectID": "index.html#about-this-website",
+    "href": "index.html#about-this-website",
+    "title": "Home",
+    "section": "",
+    "text": "This website has several pages created for this assignment, throughout one module and several submodules:\n\nHome\nDashboard\nEssay on Shiny Apps\nEssay on Shinylive"
+  },
+  {
+    "objectID": "shiny-apps.html",
+    "href": "shiny-apps.html",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "In Step 2, you learned how to build an interactive web app using Shiny. Let’s assume that your coworkers are interested in learning about it and assume that you are helping them. Create a lecture note that you can use to teach the person. This will become part of the website under “Essay on Shiny Apps.”\n\n\n\nShiny is an R package that lets users turn R code into a web application. Instead of only creating a static report, Shiny lets users interact with the app. You can change inputs like dropdown menus, sliders, checkboxes, or text boxes.\nA Shiny app is useful because the audience doesn’t need to know R or use RStudio to open the file. They can just open the app in a web browser to interact with the data.\n\n\n\nA Shiny app usually has three parts:\n\nUser Interface (UI)\nServer\nshinyApp() function\n\n\n\n\nThe user interface, or UI, controls what the user sees. This is where the app designer adds titles, input tools, and output spaces.\nExamples of inputs:\n\nselectInput() - dropdown menus\nsliderInput() - numeric sliders\ntextInput() - typed responses\n\nExamples of outputs:\n\nplotOutput() - graphs\ntableOutput() - tables\ntextOutput() - text\n\nThe UI is important because it’s the part of the app that the audience interacts with.\n\n\n\nThe server is where the app does the work. It takes the user’s input, processes it, and creates output.\nFor example, if the user chooses a year from a dropdown menu, the server can filter the data for that year and then create a graph.\nThe server usually uses render functions such as:\n\nrenderPlot() - plots\nrenderTable() - tables\nrenderText() - text\n\n\n\n\nOne of the most important parts of Shiny is reactivity.\nReactivity means that the app will automatically update when the user changes an input. If the user moves a slider or chooses a different category then the plot or table will immediately update.\n\n\n\n\n# This code is an example that can be run through the qmd file, not the html\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(dplyr)\n\nui &lt;- fluidPage(\n  titlePanel(\"Sample Shiny App: Car MPG Explorer\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\n        inputId = \"cylinders\",\n        label = \"Choose number of cylinders:\",\n        choices = sort(unique(mtcars$cyl)),\n        selected = 4\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"mpgPlot\"),\n      tableOutput(\"summaryTable\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n\n  filtered_data &lt;- reactive({\n    mtcars |&gt;\n      filter(cyl == input$cylinders)\n  })\n\n  output$mpgPlot &lt;- renderPlot({\n    ggplot(filtered_data(), aes(x = wt, y = mpg)) +\n      geom_point(size = 3) +\n      labs(\n        title = paste(\"MPG vs Weight for\", input$cylinders, \"Cylinder Cars\"),\n        x = \"Weight\",\n        y = \"Miles Per Gallon\"\n      ) +\n      theme_minimal()\n  })\n\n  output$summaryTable &lt;- renderTable({\n    filtered_data() |&gt;\n      summarise(\n        Average_MPG = round(mean(mpg), 2),\n        Average_Weight = round(mean(wt), 2),\n        Number_of_Cars = n()\n      )\n  })\n}\n\nshinyApp(ui = ui, server = server)\n\n\n\n\nThe app first loads the required packages: shiny, ggplot2, and dplyr.\nThe UI creates a page with a title, a sidebar, a dropdown menu, a plot area, and a table area.\nThe server creates a reactive dataset called filtered_data so whenever the user changes the cylinder choice, Shiny filters the data again.\nThe graph and table will update based on the filtered data.\n\n\n\nShiny is useful because it allows people to explore and interact with the data. Instead of sending someone a static chart, the creator can build an app where the audience chooses what they want to see.\nFor example, coworkers could use a Shiny app to explore:\n\nsales by region\nsurvey results\nstudent performance\nwebsite traffic\ncustomer trends\n\n\n\n\nThe main lesson from Step 2 is that Shiny connects user input to output. The user makes a choice, the server reacts to that choice, and the app updates the result.\nA basic Shiny app does not require advanced web design knowledge. The creator mainly needs to understand how the UI and server work together.\n\n\n\nShiny is a powerful tool for creating interactive web applications in R. It allows users to move beyond static reports and create dashboards, tools, and apps that respond to user input. For coworkers who need to explore data, Shiny can make analysis easier to understand and more useful."
+  },
+  {
+    "objectID": "shiny-apps.html#prompt",
+    "href": "shiny-apps.html#prompt",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "In Step 2, you learned how to build an interactive web app using Shiny. Let’s assume that your coworkers are interested in learning about it and assume that you are helping them. Create a lecture note that you can use to teach the person. This will become part of the website under “Essay on Shiny Apps.”"
+  },
+  {
+    "objectID": "shiny-apps.html#what-is-shiny",
+    "href": "shiny-apps.html#what-is-shiny",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "Shiny is an R package that lets users turn R code into a web application. Instead of only creating a static report, Shiny lets users interact with the app. You can change inputs like dropdown menus, sliders, checkboxes, or text boxes.\nA Shiny app is useful because the audience doesn’t need to know R or use RStudio to open the file. They can just open the app in a web browser to interact with the data."
+  },
+  {
+    "objectID": "shiny-apps.html#main-parts-of-a-shiny-app",
+    "href": "shiny-apps.html#main-parts-of-a-shiny-app",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "A Shiny app usually has three parts:\n\nUser Interface (UI)\nServer\nshinyApp() function"
+  },
+  {
+    "objectID": "shiny-apps.html#user-interface",
+    "href": "shiny-apps.html#user-interface",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "The user interface, or UI, controls what the user sees. This is where the app designer adds titles, input tools, and output spaces.\nExamples of inputs:\n\nselectInput() - dropdown menus\nsliderInput() - numeric sliders\ntextInput() - typed responses\n\nExamples of outputs:\n\nplotOutput() - graphs\ntableOutput() - tables\ntextOutput() - text\n\nThe UI is important because it’s the part of the app that the audience interacts with."
+  },
+  {
+    "objectID": "shiny-apps.html#server",
+    "href": "shiny-apps.html#server",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "The server is where the app does the work. It takes the user’s input, processes it, and creates output.\nFor example, if the user chooses a year from a dropdown menu, the server can filter the data for that year and then create a graph.\nThe server usually uses render functions such as:\n\nrenderPlot() - plots\nrenderTable() - tables\nrenderText() - text"
+  },
+  {
+    "objectID": "shiny-apps.html#reactivity",
+    "href": "shiny-apps.html#reactivity",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "One of the most important parts of Shiny is reactivity.\nReactivity means that the app will automatically update when the user changes an input. If the user moves a slider or chooses a different category then the plot or table will immediately update."
+  },
+  {
+    "objectID": "shiny-apps.html#example-shiny-app-code",
+    "href": "shiny-apps.html#example-shiny-app-code",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "# This code is an example that can be run through the qmd file, not the html\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(dplyr)\n\nui &lt;- fluidPage(\n  titlePanel(\"Sample Shiny App: Car MPG Explorer\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\n        inputId = \"cylinders\",\n        label = \"Choose number of cylinders:\",\n        choices = sort(unique(mtcars$cyl)),\n        selected = 4\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"mpgPlot\"),\n      tableOutput(\"summaryTable\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n\n  filtered_data &lt;- reactive({\n    mtcars |&gt;\n      filter(cyl == input$cylinders)\n  })\n\n  output$mpgPlot &lt;- renderPlot({\n    ggplot(filtered_data(), aes(x = wt, y = mpg)) +\n      geom_point(size = 3) +\n      labs(\n        title = paste(\"MPG vs Weight for\", input$cylinders, \"Cylinder Cars\"),\n        x = \"Weight\",\n        y = \"Miles Per Gallon\"\n      ) +\n      theme_minimal()\n  })\n\n  output$summaryTable &lt;- renderTable({\n    filtered_data() |&gt;\n      summarise(\n        Average_MPG = round(mean(mpg), 2),\n        Average_Weight = round(mean(wt), 2),\n        Number_of_Cars = n()\n      )\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "shiny-apps.html#how-this-example-works",
+    "href": "shiny-apps.html#how-this-example-works",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "The app first loads the required packages: shiny, ggplot2, and dplyr.\nThe UI creates a page with a title, a sidebar, a dropdown menu, a plot area, and a table area.\nThe server creates a reactive dataset called filtered_data so whenever the user changes the cylinder choice, Shiny filters the data again.\nThe graph and table will update based on the filtered data."
+  },
+  {
+    "objectID": "shiny-apps.html#why-shiny-is-useful",
+    "href": "shiny-apps.html#why-shiny-is-useful",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "Shiny is useful because it allows people to explore and interact with the data. Instead of sending someone a static chart, the creator can build an app where the audience chooses what they want to see.\nFor example, coworkers could use a Shiny app to explore:\n\nsales by region\nsurvey results\nstudent performance\nwebsite traffic\ncustomer trends"
+  },
+  {
+    "objectID": "shiny-apps.html#important-lessons-from-step-2",
+    "href": "shiny-apps.html#important-lessons-from-step-2",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "The main lesson from Step 2 is that Shiny connects user input to output. The user makes a choice, the server reacts to that choice, and the app updates the result.\nA basic Shiny app does not require advanced web design knowledge. The creator mainly needs to understand how the UI and server work together."
+  },
+  {
+    "objectID": "shiny-apps.html#conclusion",
+    "href": "shiny-apps.html#conclusion",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "Shiny is a powerful tool for creating interactive web applications in R. It allows users to move beyond static reports and create dashboards, tools, and apps that respond to user input. For coworkers who need to explore data, Shiny can make analysis easier to understand and more useful."
+  }
+]
